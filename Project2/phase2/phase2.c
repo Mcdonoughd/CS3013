@@ -19,19 +19,19 @@ typedef struct ancestry {
 } ancestry;
 
 
-//makes task_struct easier to use
+//Thanks to http://www.informit.com/articles/article.aspx?p=368650 for telling me this exists
 typedef struct task_struct task_struct;
 
 //a recursion function to pick up the ancestors
-void recurse_ancestors(task_struct* parent, pid_t* ances_ptr){
+void find_ancestors(task_struct* parent, pid_t* ances_ptr){
   pid_t tmp_pid = parent->pid; //read the pid of the current ancestor
   *ances_ptr++ = tmp_pid; //add it to the array
-  printk(KERN_INFO "A parent: %d!\n", tmp_pid);
-  if (tmp_pid == 1 || tmp_pid == 0){ //stop if weve hit init
+  printk(KERN_INFO "Has parent: %d!\n", tmp_pid);
+  if (tmp_pid == 1 || tmp_pid == 0){ //stop if pid is invalid
     return;
   }
   parent = parent->parent;
-  recurse_ancestors(parent, ances_ptr);
+  find_ancestors(parent, ances_ptr);
 }
 
 
@@ -45,10 +45,13 @@ asmlinkage long new_sys_cs3013_syscall2(unsigned short *target_pid, struct ances
   pid_t* sibl_ptr; //pointer to a sibling
   pid_t* chldrn_ptr; //pointer to  children
   pid_t tmp_pid; //tmp pointer
-  pid_t* ances_ptr;
+  pid_t* ances_ptr; //parent pointer
+
+//Bless Proffessor walls for showing me this!
+//https://www.systutorials.com/docs/linux/man/3-LIST_HEAD/
   struct list_head sib; //head of the sibling list
   struct list_head child; //head of the children list
-  task_struct *p;
+  task_struct* p; 
   task_struct* self;
   task_struct* parent;
 
@@ -93,8 +96,8 @@ asmlinkage long new_sys_cs3013_syscall2(unsigned short *target_pid, struct ances
   //if init, dont look for parents
   if (self->pid != 1){
     parent = self->parent;
-    //recurse through until we hit init
-    recurse_ancestors(parent, ances_ptr);
+    //find all ancestors
+    find_ancestors(parent, ances_ptr);
   }
 
   //copy over and test that the ancestry pointer is valid

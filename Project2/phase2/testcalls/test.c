@@ -15,7 +15,7 @@ typedef struct ancestry {
 //the test call
 #define __NR_cs3013_syscall2 334
 
-//given test callw
+//given test call
 long testCall2 (unsigned short* num, ancestry* a) {
   int pid = fork();
   if (pid < 0){
@@ -37,7 +37,6 @@ int main () {
   unsigned short* pid = (unsigned short*) malloc(sizeof(unsigned short));
   ancestry* info = (ancestry*)malloc(sizeof(ancestry));
   printf("The return values of the system calls are:\n");
-
   printf("cs3013_syscall2: %ld\n", testCall2(pid, info));
   printf("The first parent:, %d\n", info->ancestors[0]); 
   printf("The second parent:, %d\n", info->ancestors[1]);
