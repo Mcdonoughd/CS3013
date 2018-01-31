@@ -1,0 +1,29 @@
+Jan 27 20:49:37 CS-3013-VM kernel: [  333.992172] user 1000 is opening the file: /etc/fstab
+Jan 27 20:49:37 CS-3013-VM kernel: [  333.992232] Nothing read from file descriptor: 23
+Jan 27 20:49:37 CS-3013-VM kernel: [  333.992238] user 1000 is closing file descriptor: 23
+Jan 27 20:49:37 CS-3013-VM kernel: [  333.992250] user 1000 is opening the file: /proc/mounts
+Jan 27 20:49:37 CS-3013-VM kernel: [  333.992394] Nothing read from file descriptor: 23
+Jan 27 20:49:37 CS-3013-VM kernel: [  333.992399] user 1000 is closing file descriptor: 23
+Jan 27 20:49:38 CS-3013-VM kernel: [  334.878731] user 1000 is closing file descriptor: 16
+Jan 27 20:49:38 CS-3013-VM kernel: [  334.899882] user 1000 is closing file descriptor: 30
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.252023] user 1000 is opening the file: /home/student/Downloads/LKM_system_call_interception-master/part1/user_space/system_call_test.c
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.252071] user 1000 is closing file descriptor: 11
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.252087] user 1000 is opening the file: /home/student/Downloads/LKM_system_call_interception-master/part1/user_space/system_call_test.c
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.252105] user 1000 is opening the file: /home/student/Downloads/LKM_system_call_interception-master/part1/user_space/.goutputstream-1HLLDZ
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.252296] user 1000 is closing file descriptor: 16
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.253380] user 1000 is opening the file: /proc/self/task/3643/attr/current
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.253415] user 1000 is closing file descriptor: 19
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.282364] user 1000 is closing file descriptor: 17
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.283378] user 1000 is opening the file: /home/student/Downloads/LKM_system_call_interception-master/part1/user_space/.hidden
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.283496] user 1000 is opening the file: /proc/self/task/3643/attr/current
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.283519] user 1000 is closing file descriptor: 19
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.290192] user 1000 is closing file descriptor: 11
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.292025] user 1000 is opening the file: /proc/self/task/3497/attr/current
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.292113] user 1000 is closing file descriptor: 16
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.293532] user 1000 is opening the file: /proc/self/task/3497/attr/current
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.293560] user 1000 is closing file descriptor: 16
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.307724] user 1000 is closing file descriptor: 30
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.383499] user 1000 is opening the file: /usr/share/applications/gedit.desktop
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.383556] Nothing read from file descriptor: 19
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.383568] user 1000 is closing file descriptor: 19
+Jan 27 20:49:45 CS-3013-VM kernel: [  341.384021] user 1000 is opening the file: /usr/share/applications/gedit.desktop

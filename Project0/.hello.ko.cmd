@@ -1,0 +1,1 @@
+cmd_/home/student/Documents/Project0/hello.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/student/Documents/Project0/hello.ko /home/student/Documents/Project0/hello.o /home/student/Documents/Project0/hello.mod.o ;  true

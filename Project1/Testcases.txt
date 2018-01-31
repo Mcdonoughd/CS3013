@@ -1,0 +1,143 @@
+All test cases are tested on mc2 as previous versions were the basis from this version
+
+input: 0
+Output: 
+
+-- Who Am I? --
+student
+
+--- Satistics ---
+Elapsed Time: 68.919 milliseconds
+Page Faults: 1
+Page Faults (reclaimed): 96
+
+Input: 1
+Output:
+
+-- Last Logins --
+student  tty7         :0               Mon Jan 22 10:08    gone - no logout
+
+wtmp begins Fri Jan  5 17:11:16 2018
+
+--- Satistics ---
+Elapsed Time: 42.252 milliseconds
+Page Faults: 1
+Page Faults (reclaimed): 124
+
+Intput: 2
+Output:
+-- Directory Listing --
+Arguments?:
+-al
+Directory?:
+/
+total 108
+drwxr-xr-x  24 root root  4096 Jan 18 20:02 .
+drwxr-xr-x  24 root root  4096 Jan 18 20:02 ..
+drwxr-xr-x   2 root root  4096 Jan  5 17:16 bin
+drwxr-xr-x   3 root root  4096 Jan 18 20:04 boot
+drwxrwxr-x   2 root root  4096 Jan  5 17:08 cdrom
+drwxr-xr-x  15 root root  3020 Jan 22 10:08 dev
+drwxr-xr-x 130 root root 12288 Jan 18 20:04 etc
+drwxr-xr-x   3 root root  4096 Jan  5 17:08 home
+lrwxrwxrwx   1 root root    33 Jan 18 20:02 initrd.img -> boot/initrd.img-4.13.0-26-generic
+lrwxrwxrwx   1 root root    33 Jan  5 17:19 initrd.img.old -> boot/initrd.img-4.10.0-42-generic
+drwxr-xr-x  22 root root  4096 Jan  5 17:15 lib
+drwxr-xr-x   2 root root  4096 Jan 18 19:56 lib64
+drwx------   2 root root 16384 Jan  5 17:06 lost+found
+drwxr-xr-x   3 root root  4096 Jan  5 17:12 media
+drwxr-xr-x   2 root root  4096 Aug  1 07:17 mnt
+drwxr-xr-x   3 root root  4096 Jan 12 14:46 opt
+dr-xr-xr-x 166 root root     0 Jan 22 10:07 proc
+drwx------   4 root root  4096 Jan  5 17:12 root
+drwxr-xr-x  24 root root   780 Jan 22 10:12 run
+drwxr-xr-x   2 root root 12288 Jan 18 19:56 sbin
+drwxr-xr-x   2 root root  4096 Apr 29  2017 snap
+drwxr-xr-x   2 root root  4096 Aug  1 07:17 srv
+dr-xr-xr-x  12 root root     0 Jan 22 10:07 sys
+drwxrwxrwt  10 root root  4096 Jan 22 10:28 tmp
+drwxr-xr-x  11 root root  4096 Aug  1 07:24 usr
+drwxr-xr-x  14 root root  4096 Aug  1 07:34 var
+lrwxrwxrwx   1 root root    30 Jan 18 20:02 vmlinuz -> boot/vmlinuz-4.13.0-26-generic
+lrwxrwxrwx   1 root root    30 Jan  5 17:19 vmlinuz.old -> boot/vmlinuz-4.10.0-42-generic
+
+--- Satistics ---
+Elapsed Time: 12.820 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 145
+
+Input: p
+output: -- Current Directory --
+/home/student/Documents/Project1
+
+Input: c
+output:
+-- Change Directory --
+Directory?:/home
+
+Input P
+output:
+-- Current Directory --
+/home
+
+Input a
+	free -m
+output: 
+-- Add Command --
+Command to add: free -m
+Okay, added with ID 3
+
+Input 3
+Output:
+-- Command free -m --
+              total        used        free      shared  buff/cache   available
+Mem:           3849         634        2251          17         963        3121
+Swap:          8189           0        8189
+
+--- Satistics ---
+Elapsed Time: 50.449 milliseconds
+Page Faults: 1
+Page Faults (reclaimed): 146
+
+Input a 
+	make -j4 O=~/kernelDst &
+Output:
+-- Add Command --
+Command to add: make -j4 O=~/kernelDst &
+Okay, added with ID 4
+
+
+Input 4
+output:
+-- Command: make -j4 O=~/kernelDst & --
+
+-- Command make --
+[1] 0
+
+-- Command make --
+make: *** No targets specified and no makefile found.  Stop.
+
+--- Satistics ---
+Elapsed Time: 14.313 milliseconds
+Page Faults: 0
+Page Faults (reclaimed): 130
+
+input r
+output:
+-- Background Processes --
+[1] 5349
+
+input e:
+ COWARD!!! 
+ There are processes still running!
+
+input e:
+Logging you out, Commander.
+
+ 
+
+
+
+
+
+
