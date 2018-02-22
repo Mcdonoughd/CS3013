@@ -1,0 +1,43 @@
+Instruction?: 
+Given Args: 0,map,0,0
+
+Mapped virtual address 0 (page 0) into physical frame 0 with permissions: 0
+Instruction?: 
+Given Args: 0,store,7,255
+
+ERROR: writes are not allowed to this page
+Instruction?: 
+Given Args: 0,map,0,1
+
+Updating permissions for virtual page 0 (frame 0)
+Instruction?: 
+Given Args: 0,store,7,255
+
+Stored value 255 at virtual address 7 (physical address 7) for proccess 0
+Instruction?: 
+Given Args: 0,load,7,0
+
+The value 255 is virtual address 7 (physical address 7)
+Instruction?: 
+Given Args: 0,map,10,1
+
+Error: virtual page 0 is already mapped with rw_bit=1
+Instruction?: 
+Given Args: 0,map,16,1
+
+Mapped virtual address 16 (page 1) into physical frame 0 with permissions: 1
+Instruction?: 
+Given Args: 0,map,32,1
+
+Mapped virtual address 32 (page 2) into physical frame 0 with permissions: 1
+Instruction?: 
+Given Args: 1,map,0,0
+
+Mapped virtual address 0 (page 4) into physical frame 0 with permissions: 0
+Instruction?: 
+Given Args: 0,load,7,0
+
+The value 0 is virtual address 7 (physical address 7)
+Instruction?: 
+Done!
+
