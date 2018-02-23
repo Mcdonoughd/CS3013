@@ -24,16 +24,10 @@ int valid; //valid bit 1 = read&write 0 = read only
 int frame_num; //page_table frame number [0,3]
 int PID; //corresponding process id [0,3]
 int pagenum; //page number [0,15] (should never change through the program)
-unsigned int useage; //counter of instructions done not on the page table while it is in the TLB
+int useage; //counter of instructions done not on the page table while it is in the TLB
 int values[15]; //holds corresponding values in the page table
 };
 
-struct page_table ptable[15]; //array of page tables holding 0 t0 15 oganized by pagenumber
-
-int TLB_size =0; //holds the size for init/first time mapping purposes
-
-//transistion lookaside buffer 
-struct page_table TLB[3]; 
 
 //struct of physical memory address
 struct physical_addr{
@@ -41,6 +35,15 @@ int frame_num;//frame number mapped to the page table
 int offset;//offset mapping to memory (the array) given by virtual mem
 };
 struct physical_addr p_addr[3]; //array of physicall addresses so that each index is equal to a frame
+
+
+
+struct page_table ptable[15]; //array of page tables holding 0 t0 15 oganized by pagenumber
+
+int TLB_size =0; //holds the size for init/first time mapping purposes
+
+//transistion lookaside buffer 
+struct page_table TLB[3]; 
 
 
 //prints TLB INFO
@@ -56,6 +59,24 @@ printf("TLB has pagenumber: %d in frame %d, with a useage of %d\n\n",TLB[i].page
 }
 }
 
+void print_cache_values(){
+for(int i=0;i<4;i++){
+for(int j=0;j<16;j++){
+printf("TLB:%d = [%d]\n",i,TLB[i].values[j]);
+
+}
+
+
+}
+}
+
+
+void print_pTable(){
+for(int i=0;i<16;i++){
+printf("PAGENUM=%d\n",ptable[i].pagenum);
+}
+
+}
 
 //initializes all* arrays (not TLB)
 void init_structs(){
@@ -74,14 +95,15 @@ void init_structs(){
 	for(int i=0; i<16; i++){
 	ptable[i].valid = 1;
 	ptable[i].pagenum = i;
+	//printf("%d\n",ptable[i].pagenum);
 	ptable[i].frame_num = i % 4;
 	ptable[i].PID = i % 4;
 	ptable[i].useage = 0;
 	v_mem[i].pagenum = i; 
 	v_mem[i].offset = 0; 
-	for(int j=0;i<16;i++){
+	for(int j=0;j<16;j++){
 	ptable[i].values[j]=-1;
-}
+	}
 }
 
 }
@@ -222,11 +244,11 @@ int writeIntoMem(int start, char* value){
 void REMAP(int frame_num,int pagenum){
 char buffer[15] = "";
 //int* values;
-for(int i =0;i<16;i++){
-buffer[i]=TLB[check_TLB(pagenum)].values[i]-'0';
-}
+
 int mem = get_mem(frame_num,0);
-//sprintf(buffer, "%d", TLB[check_TLB(pagenum)].values);
+for(int i =0;i<16;i++){
+sprintf(buffer, "%d", TLB[check_TLB(pagenum)].values[i]);
+}
 writeIntoMem(mem, buffer);
 //print_v_mem(pagenum);
 
@@ -258,6 +280,7 @@ ptable[old_page].valid = TLB[cache_index].valid;
 for(int i=0;i<16;i++){
 ptable[old_page].values[i]=TLB[cache_index].values[i];
 }
+//print_cache_values();
 //table to swap in: ptable[pagenum]
 
 //load new table in
@@ -268,6 +291,8 @@ TLB[cache_index].pagenum = pagenum;
 for(int i=0;i<16;i++){
 TLB[cache_index].values[i]=ptable[pagenum].values[i];
 }
+printf("VALUES HAVE BEEN SWAPPED\n");
+//print_cache_values();
 //remap the physical and virtual memory
 REMAP(cache_index,pagenum);
 
@@ -285,7 +310,7 @@ int in_TLB = 0; //in tlb flag
 
 if(TLB_size==0){//TLB is empty
 //put the page into the TLB
-//TLB[0].pagenum=pagenum;
+TLB[0].pagenum=pagenum;
 TLB[0].valid = value;
 TLB[0].useage=0;
 TLB[0].PID = pid;
@@ -312,6 +337,7 @@ TLB[TLB_size].valid = value;
 TLB[TLB_size].useage=0;
 TLB[TLB_size].PID = pid;
 TLB[TLB_size].frame_num = ptable[pagenum].frame_num;
+TLB[TLB_size].pagenum = ptable[pagenum].pagenum;
 for(int i=0;i<16;i++){
 TLB[TLB_size].values[i]=ptable[pagenum].values[i];
 }
@@ -327,8 +353,9 @@ Swap(pagenum,cache_index);
 TLB[cache_index].PID = pid;
 TLB[cache_index].valid = value;
 TLB[cache_index].frame_num = cache_index;
-//TLB[cache_index].values=ptable[pagenum].values;
-
+for(int i=0;i<16;i++){
+TLB[cache_index].values[i]=ptable[pagenum].values[i];
+}
 printf("Put page table for PID %d into physical frame %d\n",pid,cache_index);
 }
 
@@ -340,7 +367,6 @@ printf("Put page table for PID %d into physical frame %d\n",pid,cache_index);
 
 // Maps page to physical page
 int map(int pid, int v_addr, int value){
-
 //print_TLB();
 int pagenum = get_page(v_addr,pid);
 //printf("MAPPING PAGE NUMBER: %d\n",pagenum);
@@ -379,7 +405,7 @@ int readIntoMem(int start){
             buffer[i] = memory[start + i];
 	}
         else{
-            buffer[i] = '\0';
+            buffer[i] = '0';
             break;
         }
     }
@@ -396,12 +422,13 @@ return -1;
 //load into memory
 int load(int pid, int v_addr){
 int pagenum = get_page(v_addr,pid);
-
+printf("SEARCHING FOR PAGENUM: %d\n",pagenum);
+//print_TLB();
 if(check_TLB(pagenum)==-1){
 printf("Corresponding Page Not Loaded!\n");
 int cache_index = LRU();
 Swap(pagenum,cache_index);//swap in the page
-
+//insert_TLB(int pagenum,int pid,int value)
 }
 
 //get TLB page id
@@ -411,12 +438,12 @@ update_useage(cache_index);//reset usage count
 
 int mem = get_mem(loaded_table.frame_num,get_offset(v_addr));
 
-if(readIntoMem(mem)==-1){
+if(loaded_table.values[get_offset(v_addr)]<0){
 printf("The value (EMPTY) is virtual address %d (physical address %d)\n",v_addr,mem);
 return(1);
 }
 
-printf("The value %d is virtual address %d (physical address %d)\n",readIntoMem(mem),v_addr,mem);
+printf("The value %d is virtual address %d (physical address %d)\n",loaded_table.values[get_offset(v_addr)],v_addr,mem);
 return(0);
  
 }
@@ -440,23 +467,25 @@ Swap(pagenum,cache_index);//swap in the page
 }
 int cache_index = check_TLB(pagenum);
 
-struct page_table loaded_table = TLB[cache_index];
+//struct page_table loaded_table = TLB[cache_index];
 //reset useage counter
 update_useage(cache_index);
-if(loaded_table.valid == 0){
+if(TLB[cache_index].valid == 0){
  printf("ERROR: writes are not allowed to this page\n");
 return 1;
 }
 //write to actual memory	
 char buffer[10] = "";
      
-	int mem = get_mem(loaded_table.frame_num,get_offset(v_addr));
+	int mem = get_mem(TLB[cache_index].frame_num,get_offset(v_addr));
         sprintf(buffer, "%d", value);
         writeIntoMem(mem, buffer);
-//write to page sub memory
-loaded_table.values[get_offset(v_addr)] = value;
+	//write to page sub memory
+	TLB[cache_index].values[get_offset(v_addr)] = value;
+	
         printf("Stored value %d at virtual address %d (physical address %d) for proccess %d\n", value, v_addr, mem,pid);
  //print_memory();
+//print_cache_values();
     return 0; // Success
 }
 
@@ -476,7 +505,7 @@ int main(int argc, char *argv[]){
     char* token;
 
     init_structs(); //init structs
-
+//print_pTable();
 //start the loop
     while (is_end != 1) {
         printf("Instruction?: \n");
