@@ -89,6 +89,10 @@ asmlinkage long new_sys_cs3013_syscall2(unsigned short *target_pid, struct ances
   //list all the siblings and store the pids
   list_for_each_entry (p, &(self->sibling), sibling){
     tmp_pid = p->pid;
+	if(tmp_pid == 0){
+	return;
+	//if pid is 0 then the sibling is the original child
+	}
     *sibl_ptr++ = tmp_pid;
     printk(KERN_INFO "%d's sibling: %d!\n", self->pid, tmp_pid);
   }

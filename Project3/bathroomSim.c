@@ -52,7 +52,7 @@ int genNormDistro(int mean) {
 
 void *Individual(void *info) {
     person_info *Stranger = (person_info *) info;
-    long minQueuetime = 999999999; //minimum time spent in queue
+    unsigned long minQueuetime = 999999999; //minimum time spent in queue
     long avgQueuetime = 0; //average time spent in queue
     long maxQueuetime = 0; //maximum time spent in queue
     long totalQueuetime = 0; //total time spent in queue
