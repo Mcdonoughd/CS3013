@@ -8,7 +8,7 @@ Here you will find the following Folders:
 Class Slides:   &nbsp;	Copies of the Lecture Slides
 
 
-Project0: &nbsp; Making a Loadable Link Module
+Project0: &nbsp; Loadable Kernal Module
 
 
 Project1:  &nbsp; Midday Commander
