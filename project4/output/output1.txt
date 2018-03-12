@@ -1,0 +1,21 @@
+Starting Memory Simulation 
+Instruction?: 
+Page table for process 0 created at address 0
+Physical page for VPN 0 allocated at: 16
+
+Instruction?: 
+Stored 1 at physical address 29 
+
+Instruction?: 
+Altered Page value
+
+Instruction?: 
+ERROR: Virtual Address 13 is not writeable 
+
+Instruction?: 
+The value at virtual address 13 is: 1 
+
+Instruction?: 
+ERROR: Segfault, memory has not been allocated for virtual address 33 
+
+Instruction?: 

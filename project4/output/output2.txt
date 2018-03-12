@@ -1,0 +1,49 @@
+Starting Memory Simulation 
+Instruction?: 
+Page table for process 0 created at address 0
+Physical page for VPN 0 allocated at: 16
+
+Instruction?: 
+Page table for process 1 created at address 32
+Physical page for VPN 0 allocated at: 48
+
+Instruction?: 
+Stored 232 at physical address 21 
+
+Instruction?: 
+Stored 12 at physical address 60 
+
+Instruction?: 
+Swapped frame 3 to disk line 1 
+Swapped frame 1 to disk line 2 
+Page table for process 2 created at address 16
+Physical page for VPN 0 allocated at: 48
+
+Instruction?: 
+Swapped frame 3 to disk line 3 
+Page 0 for process 0 loaded from disk and stored at address 48
+The value at virtual address 5 is: 232 
+
+Instruction?: 
+Swapped frame 3 to disk line 4 
+Page 0 for process 1 loaded from disk and stored at address 48
+The value at virtual address 12 is: 12 
+
+Instruction?: 
+Swapped frame 3 to disk line 5 
+Physical page for VPN 1 allocated at: 48
+
+Instruction?: 
+Swapped frame 3 to disk line 6 
+Page table for process 0 was swapped to disk 
+Page table for process 3 created at address 0
+Physical page for VPN 0 allocated at: 48
+
+Instruction?: 
+Swapped frame 3 to disk line 8 
+Page table for process 0 loaded from disk and stored at address 48
+Swapped frame 1 to disk line 9 
+Page 0 for process 0 loaded from disk and stored at address 16
+The value at virtual address 5 is: 232 
+
+Instruction?: 
